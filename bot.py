@@ -305,7 +305,7 @@ async def router(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return await select_spool(update, context)
 
 # ---------- main ----------
-async def main():
+def main():
     init_db()
     token = os.environ.get("BOT_TOKEN")
     if not token:
@@ -340,8 +340,8 @@ async def main():
     # Роутер
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, router))
 
-    await app.run_polling()
+    # Запуск бота
+    app.run_polling()
 
 if __name__ == "__main__":
-    import asyncio
-    asyncio.run(main())
+    main()
